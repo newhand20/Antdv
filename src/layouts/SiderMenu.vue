@@ -36,6 +36,7 @@ import {
   AppstoreOutlined,
 } from '@ant-design/icons-vue';
 import SubMenu from "./SubMenu.vue"
+import { check} from '../utils/auth'
 export default defineComponent({
   setup() {
     const router = useRouter()
@@ -60,7 +61,12 @@ export default defineComponent({
 
     const getMenuData = (routes=[], parentKeys = [], selectedKey) =>{
       const menuData = []
+      //存在权限控制的界面并且权限不够，直接不让它渲染出来
       routes.forEach(item => {
+        if(item.meta && item.meta.authority && !check(item.meta.authority)){
+          return
+        }
+
         if(item.name && !item.hideInMenu){
           openKeysMap[item.path] = parentKeys;
           selectedKeysMap[item.path] = [selectedKey || item.path]
