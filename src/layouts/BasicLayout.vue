@@ -16,8 +16,8 @@
 
     <a-layout>
       <a-layout-header style="background: #fff; padding: 0; display: flex;" >
-        <menu-unfold-outlined  class="trigger" v-if="collapsed" @click="collapsed = !collapsed"/>
-        <menu-fold-outlined  class="trigger" v-else   @click="collapsed = !collapsed"/>
+        <menu-unfold-outlined v-auth="['admin']" class="trigger" v-if="collapsed" @click="collapsed = !collapsed"/>
+        <menu-fold-outlined v-auth="['admin']" class="trigger" v-else   @click="collapsed = !collapsed"/>
         <Header></Header>
       </a-layout-header>
       
@@ -35,7 +35,11 @@
         <Footer></Footer>
       </a-layout-footer>
 
-      <SettingDrawer/>
+      <Authorized :authority="['admin']">
+        <template v-slot>
+          <SettingDrawer/>
+        </template>
+      </Authorized>
     </a-layout>
   </a-layout>
 </template>
