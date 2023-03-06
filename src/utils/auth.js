@@ -1,5 +1,5 @@
 export function getCurrentAuthority() {
-  return ["admin"];
+  return ["user"];
 }
 
 //校验用户权限

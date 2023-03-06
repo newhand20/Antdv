@@ -148,7 +148,8 @@ router.beforeEach((to,from,next)=>{
         path:"/user/login"
       });
       //已登录信息提示权限不够，跳到403
-    } else if (to.path !== "/403") {
+    } 
+    else if (to.path !== "/403") {
       notification[type]({
         message: '403',
         description: '你没权限访问，请联系管理员',

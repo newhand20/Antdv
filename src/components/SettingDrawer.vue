@@ -10,7 +10,7 @@
   <div>
     <h2>整体风格定制</h2>
     <a-radio-group 
-      :value="route.params.navTheme || 'dark'"
+      :value="route.query.navTheme || 'dark'"
       @change="e=>HandleSettingChange('navTheme', e.target.value)"
     >
       <a-radio value='dark'>黑色</a-radio>
@@ -19,7 +19,7 @@
 
     <h2>导航模式</h2>
     <a-radio-group 
-      :value="route.params.navLayout || 'left'"
+      :value="route.query.navLayout || 'left'"
       @change="e=>HandleSettingChange('navLayout', e.target.value)"
     >
       <a-radio value='left'>左边</a-radio>
@@ -47,7 +47,7 @@ export default defineComponent({
       console.log('visible', bool);
     };
     const HandleSettingChange=(type, value)=> {
-      router.push({params:{...route.params, [type]:value}})
+      router.push({query:{...route.query, [type]:value}})
     }
     return {
       route,

@@ -1,9 +1,7 @@
 <template>
-    <div >
-      dashboard
-      <router-view></router-view>
-    </div>
-  </template>
+  dashboard1
+  <router-view/>
+</template>
   
   <script>
   export default {

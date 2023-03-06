@@ -22,13 +22,7 @@
       </a-layout-header>
       
       <a-layout-content style="margin: 0 16px">
-        <a-breadcrumb style="margin: 16px 0">
-          <a-breadcrumb-item>User</a-breadcrumb-item>
-          <a-breadcrumb-item>Bill</a-breadcrumb-item>
-        </a-breadcrumb>
-        <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">
-          Bill is a cat.
-        </div>
+        <RouterView></RouterView>
       </a-layout-content>
       
       <a-layout-footer style="text-align: center">
@@ -52,9 +46,11 @@ import SiderMenu from "./SiderMenu.vue"
 import Header from "./Header.vue"
 import Footer from "./Footer.vue"
 import SettingDrawer from "../components/SettingDrawer.vue"
+import Dashboard from "../views/Dashboard/Dashboard.vue"
 
 export default defineComponent({
   components: {
+    Dashboard,
     PieChartOutlined,
     DesktopOutlined,
     UserOutlined,
@@ -70,10 +66,10 @@ export default defineComponent({
   setup(){
     const route = useRoute()
     const navTheme = computed(()=>{
-      return route.params.navTheme || "dark"
+      return route.query.navTheme || "dark"
     })
     const navLayout = computed(()=>{
-      return route.params.navLayout || "left"
+      return route.query.navLayout || "left"
     })
     return {
       navTheme,
