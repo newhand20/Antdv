@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import request from '@/utils/request'
 import Chart from "../../components/chart.vue"
 import random from 'lodash/random'
 import {onMounted, onBeforeMount, ref,reactive} from "vue"
@@ -32,9 +32,11 @@ export default {
             ]
      })
     const getChartData=()=>{
-      axios
-        .get("/api/dashboard/chart",{ params:{id: 123456}} )
-        .then((res)=>{
+      request({
+        url:"/api/dashboard/chart",
+        method:"get",
+        params:{ ID: 123456}
+      }).then((res)=>{
           chartOption.series[0].data = res.data
         })
     }
