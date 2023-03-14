@@ -12,6 +12,9 @@
     <a-form-item has-feedback label="付款账户" name="payAccount">
       <a-input v-model:value="formState.payAccount" autocomplete="off" />
     </a-form-item>
+    <ReceiveAccount  label="收款账户" name="receiveAccount" :value="formState.receiveAccount">
+      <a-input v-model:value="formState.receiveAccount" autocomplete="off" />
+    </ReceiveAccount>
     <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
       <a-button type="primary"  @click="handleSubmit" html-type="submit">Submit</a-button>
       <a-button style="margin-left: 10px">Reset</a-button>
@@ -22,13 +25,19 @@
 import { defineComponent, reactive, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router'
 import store from '../../../store'
+import ReceiveAccount from "../../../components/ReceiverAccount.vue"
 export default defineComponent({
+  components:{
+    ReceiveAccount
+  },
   setup() {
     const formRef = ref();
     const router = useRouter()
     const formState = reactive({
-      payAccount: store.state.form.step.payAccount
+      payAccount: store.state.form.step.payAccount,
+      receiveAccount: store.state.form.step.receiveAccount
     });
+    
     let validatepayAccount = async (_rule, value) => {
       if (value === '') {
         console.log(store)
@@ -37,10 +46,15 @@ export default defineComponent({
         return Promise.resolve();
       }
     };
+
     const rules = {
       payAccount: [{
         required: true,
         validator: validatepayAccount,
+        trigger: 'change',
+      }],
+      receiveAccount: [{
+        required: true,
         trigger: 'change',
       }],
     };
