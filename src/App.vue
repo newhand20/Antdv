@@ -1,6 +1,27 @@
 <template>
-  <router-view />
+  <a-config-provider :locale="locale">
+    <router-view />
+  </a-config-provider>
 </template>
+
+<script>
+import zhCN from 'ant-design-vue/es/locale/zh_CN';
+import enUS from 'ant-design-vue/es/locale/en_US';
+import moment from 'moment'
+export default {
+  data() {
+    return {
+      locale: zhCN,
+    };
+  },
+  watch:{
+    "$route.query.locale":function(val){
+      this.locale = val ==="enUS" ? enUS: zhCN
+      moment.locale(val ==="enUS" ? "en": "zh-cn")
+    }
+  }
+};
+</script>
 
 <style lang="less">
 #app {
@@ -24,3 +45,4 @@ nav {
   }
 }
 </style>
+
